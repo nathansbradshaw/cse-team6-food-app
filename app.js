@@ -4,9 +4,9 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-// const uri = process.env.MONGODB_URL || (process.env.URI).toString();
+const uri = process.env.MONGODB_URL || (process.env.URI).toString();
 const adminID = (process.env.ADMIN_ID).toString();
 
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
@@ -60,7 +60,7 @@ app.use(mainRoutes);
 app.use(errorController.get404);
 
 
-// mongoose.connect(uri, options).then(result => {
+mongoose.connect(uri, options).then(result => {
 //    // const user = new User({
 //    //    name: 'nate',
 //    //    email: 'nate@nate.com',
@@ -70,6 +70,6 @@ app.use(errorController.get404);
 //    // });
 //    // user.save();
    app.listen(PORT, () => console.log(`Listening on ${PORT}`));
-// }).catch(err => {
-//    console.log(err);
-// })
+}).catch(err => {
+   console.log(err);
+})
