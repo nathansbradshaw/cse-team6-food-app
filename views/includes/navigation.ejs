@@ -1,7 +1,7 @@
 <nav class="navbar is-fixed-top is-primary has-shadow" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <img src="/img/shop.png" width="40" height="290">
+            <img src="/img/shop.png" alt="App Logo" width="40" height="290">
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
@@ -13,20 +13,19 @@
 
     <div id="navbarBasic" class="navbar-menu">
         <div class="navbar-item">
-            <a class="navbar-item <%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
-            <a class="navbar-item <%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
+            <a class="navbar-item <%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+            <a class="navbar-item <%= path === '/products' ? 'active' : '' %>" href="/products">Items</a>
             <a class="navbar-item <%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
             <a class="navbar-item <%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
-                <a class="navbar-item <%= path === '/admin/add-product' ? 'active' : '' %>"
-                    href="/admin/add-product">Add
-                    Product
+                <a class="navbar-item <%= path === '/item/add-item' ? 'active' : '' %>"
+                    href="/item/add-item">
+                    Add Item
                 </a>
-                <a class=" navbar-item <%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin
-                    Products
+                <a class=" navbar-item <%= path === '/item/items' ? 'active' : '' %>" href="/item/items">Items
                 </a>
             </div>
         </div>
