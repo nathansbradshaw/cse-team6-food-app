@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body class="has-background-grey-light">
+        <%- include('../includes/navigation.ejs') %>
+
+            <main>
+                <div class="flex-box">
+                    <% if (items.length> 0) { %>
+                        <div class="flex-box">
+                            <% for (let item of items) { %>
+                                <div class="card item-item card-parent">
+                                    <header class="card-header">
+                                        <h2 class="card-header-title is-centered">
+                                            <%= item.itemName %>
+                                        </h2>
+                                    </header>
+                                    <div class="card-content">
+                                        <p>Expiration: <%= item.itemExp %>" </p>
+                                    </div>
+                                    <div class="card-content">
+                                        <h2 class="has-text-centered">Quantity: 
+                                            <%= item.quantity %>
+                                        </h2>
+                                        <p class="">
+                                            <%= item.description %>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer px-1 py-1 card-flex-footer flex-spaced">
+                                        <a href="/item/edit-item/<%= item._id %>?edit=true"
+                                            class="button is-info">Edit</a>
+                                        <form action="/item/delete-item" method="POST">
+                                            <input type="hidden" value="<%= item._id %>" name="itemId">
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                            <button class="button is-danger" type="submit">Delete</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+
+                                <% } %>
+                                    <% } else { %>
+                                        <h1>No items Found!</h1>
+                             <% } %>
+                        </div>
+                </div>
+            </main>
+            <%- include('../includes/end.ejs') %>

@@ -5,6 +5,9 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+// const session = require('express-session');
+// const MongoDBStore = require('connect-mongodb-session')(session);
+// const csrf = require('csurf');
 
 const uri = process.env.MONGODB_URL || (process.env.URI).toString();
 const adminID = (process.env.ADMIN_ID).toString();
@@ -22,6 +25,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const mainRoutes = require('./routes/main');
+const itemRoutes = require('./routes/item');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -34,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // };
 // app.use(cors(corsOptions));
 
+
 const options = {
    useUnifiedTopology: true,
    useNewUrlParser: true,
@@ -41,8 +46,13 @@ const options = {
    useFindAndModify: false,
    family: 4
 };
-
-
+app.use((req, res, next) => {
+   // res.locals.isAuthenticated = req.session.isLoggedIn; 
+   res.locals.isAuthenticated = true;
+   // res.locals.csrfToken = req.csrfToken();
+   res.locals.csrfToken = '1234';
+   next();
+})
 
 
 // app.use((req, res, next) => {
@@ -56,19 +66,14 @@ const options = {
 
 
 app.use(mainRoutes);
+app.use('/item',itemRoutes);
+
+app.get('/500',errorController.get500);
 
 app.use(errorController.get404);
 
 
 mongoose.connect(uri, options).then(result => {
-//    // const user = new User({
-//    //    name: 'nate',
-//    //    email: 'nate@nate.com',
-//    //    cart: {
-//    //       items: []
-//    //    }
-//    // });
-//    // user.save();
    app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 }).catch(err => {
    console.log(err);

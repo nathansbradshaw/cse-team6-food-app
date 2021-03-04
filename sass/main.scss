@@ -1,0 +1,129 @@
+
+@charset "utf-8";
+$primary: #c2185b;
+$primary-dark: #8c0032;
+$primary-light:#fa5788;
+
+$info: #0d47a1;
+$info-dark:#002171;
+$info-light:#5472d3;
+
+$grey-light: #e6e6e6;
+$footer-background-color: #b6b6b6;
+
+@import "../node_modules/bulma/bulma.sass";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+$navitem-border-radious: .7em;
+html,
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body > footer {
+    margin-top: auto;
+}
+.bg-translucent{
+  background-color: #242323ab;
+}
+.paralax-logo {
+  background-image: url(/img/store.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100vw;
+}
+
+.card-parent {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.card-flex-footer {
+  margin-top: auto;
+}
+.flex-spaced {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flex-left {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+.is-not-rounded {
+  border-radius: 0px;
+}
+
+.signup-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+
+// -----------------------------------------------------------
+.navbar-item{
+   border-radius: $navitem-border-radious;
+   transition: 0.7s;
+   margin-left: .5em;
+   color: aliceblue;
+}
+.navbar-item a:hover,
+.navbar-item a:active,
+.navbar-item a.active {
+  background-color: $primary-dark;
+  border-radius: $navitem-border-radious;
+  color: aliceblue;
+  -moz-box-shadow:    inset 1px 1px 5px #0000004a;
+  -webkit-box-shadow: inset 1px 1px 5px #0000004a;
+  box-shadow:         inset 1px 1px 5px #0000004a;
+}
+.has-shadow{
+   -moz-box-shadow:     1px 1px 5px  #0000004a;
+   -webkit-box-shadow:  1px 1px 5px  #0000004a;
+   box-shadow:          1px 1px 5px  #0000004a;
+}
+
+
+@media (min-width: 768px) {
+  .main-header__nav {
+    display: flex;
+  }
+
+  #side-menu-toggle {
+    display: none;
+  }
+  
+}
+@media only screen and (max-width: 1023px) {
+  .navbar-item{
+    color: black;
+
+  }
+  .navbar-item a:hover,
+.navbar-item a:active,
+.navbar-item a.active {
+  background-color: $primary-dark;
+  border-radius: $navitem-border-radious;
+  color: aliceblue;
+  -moz-box-shadow:    inset 1px 1px 5px #0000004a;
+  -webkit-box-shadow: inset 1px 1px 5px #0000004a;
+  box-shadow:         inset 1px 1px 5px #0000004a;
+}
+}
+
+.form-control input.invalid, 
+.form-control textarea.invalid {
+  border-color: red;
+}
+
+

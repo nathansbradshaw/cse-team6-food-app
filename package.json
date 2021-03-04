@@ -12,7 +12,7 @@
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.26.13",
+    "browser-sync": "^2.26.14",
     "gulp": "^4.0.2",
     "gulp-connect": "^5.7.0",
     "gulp-livereload": "^4.0.2",
@@ -30,6 +30,8 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
+    "express-validator": "^6.10.0",
+    "js-datepicker": "^5.18.0",
     "livereload": "^0.9.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.13",

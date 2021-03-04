@@ -1,0 +1,58 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        
+        <%- include('../includes/navigation.ejs') %>
+
+            <% if (errorMessage) { %>
+                <div class="box has-background-danger">
+                    <%= errorMessage %>
+                </div>
+                <% } %>
+
+                    <main>
+                        <form class="mt-6"
+                            action="/item/<% if (editing) { %>edit-item<% } else { %>add-item<% } %>"
+                            method="POST">
+                            <div class="field">
+                                <label class="label" for="itemName">Item Name</label>
+                                <div class="control">
+                                    <input
+                                        class="input <%= validationErrors.find(e => e.param === 'title') ? 'is-danger' : 'is-success' %>"
+                                        type="text" name="itemName" id="itemName" 
+                                        value="<% if (editing || hasError) { %><%= item.title %><% } %>">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="itemExp">Item Expiration</label>
+                                <input
+                                    class="input <%= validationErrors.find(e => e.param === 'imageUrl') ? 'is-danger' : 'is-success' %>"
+                                    type="date" name="itemExp" id="itemExp"
+                                    value="<% if (editing || hasError) { %><%= item.imageUrl %><% } %>">
+                            </div>
+                            <div class="field">
+                                <label class="label" for="quantity">Quantity</label>
+                                <input
+                                    class="input <%= validationErrors.find(e => e.param === 'price') ? 'is-danger' : 'is-success' %>"
+                                    type="number" name="quantity" id="quantity" step="1"
+                                    value="<% if (editing || hasError) { %><%= item.price %><% } %>">
+                            </div>
+                            <div class="field">
+                                <label class="label" for="description">Description</label>
+                                <textarea
+                                    class="textarea <%= validationErrors.find(e => e.param === 'description') ? 'is-danger' : 'is-success' %>"
+                                    name="description" id="description"
+                                    rows="5"><% if (editing || hasError) { %><%= item.description %><% } %></textarea>
+                            </div>
+
+                            <% if (editing) { %>
+                                <input type="hidden" value="<%= item._id %>" name="itemId">
+                                <% } %>
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button class="button is-success" type="submit">
+                                        <% if (editing) { %>Update item<% } else { %>Add item<% } %>
+                                    </button>
+                        </form>
+                    </main>
+                    <%- include('../includes/end.ejs') %>
