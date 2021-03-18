@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-// const csrf = require('csurf');
+const csrf = require('csurf');
 const flash = require('connect-flash');
 
 const uri = process.env.MONGODB_URL || (process.env.URI).toString();
@@ -24,6 +24,7 @@ const store = new MongoDBStore({
    uri:uri,
    collection: 'sessions'
 })
+const csrfProtection = csrf();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -35,15 +36,15 @@ const authRoutes = require('./routes/auth');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'my secret change me', resave: false, saveUninitialized: false, store: store}));
-// app.use(csrfProtection);
+app.use(csrfProtection);
 app.use(flash());
 
 
-// const corsOptions = {
-//    origin: "https://nathan-cse341-prove.herokuapp.com/",
-//    optionsSuccessStatus: 200
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+   origin: "https://cse-food-app.herokuapp.com/",
+   optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 
 const options = {
@@ -55,11 +56,15 @@ const options = {
 };
 app.use((req, res, next) => {
    res.locals.isAuthenticated = req.session.isLoggedIn; 
+   res.locals.isListView = req.session.isListView; 
+   res.locals.isDeleteMode = req.session.isDeleteMode; 
    if(req.session.user) {
       res.locals.username = req.session.user.fname;
+   } else {
+      res.locals.username = 'Guest';
    }
-   // res.locals.csrfToken = req.csrfToken();
-   res.locals.csrfToken = '1234';
+   res.locals.csrfToken = req.csrfToken();
+   // res.locals.csrfToken = '1234';
    next();
 })
 

@@ -1,52 +1,56 @@
 <%- include('../includes/head.ejs') %>
     </head>
+    <% const months=["January", "February" , "March" , "April" , "May" , "June" , "July" , "August" , "September"
+        , "October" , "November" , "December" ]; %>
 
-    <body class="has-background-grey-light">
-        <%- include('../includes/navigation.ejs') %>
-        <% let today = new Date(); %> 
+        <body class="has-background-grey-light">
+            <%- include('../includes/navigation.ejs') %>
+                <% let today=new Date(); %>
 
-            <main>
-                <div class="flex-box">
-                    <% if (items.length> 0) { %>
-                        <div class="flex-box">
-                            <% for (let item of items) { %>
-                                <%
-                                let expDate = new Date((item.itemExp.toISOString().split('T')[0]).replace(/-/g,"/")); 
-                                let difference = expDate.getTime() - today.getTime();
-                                let days = Math.ceil(difference / (1000 * 3600 * 24));  
-                                %>
-                                <div class="card item-item card-parent">
-                                    <header class="card-header">
-                                        <h2 class="card-header-title is-centered">
-                                            <%= item.itemName %>
-                                        </h2>
-                                    </header>
-                                    <div class="card-content">
-                                        <p>Expiration: <%= (item.itemExp.toISOString().split('T')[0]).replace(/-/g,"/") %> </p>
-                                        <p class="<% if(days < 3) {%> has-text-danger<% } %>">Shelf life remaining: 
-                                           <%= days %> Days
-                                        </p>
-                                        <p>Quantity: <%= item.quantity %> </p>
-                                        <p class=""> <%= item.description %>  </p>
-                                    </div>
-                                    <div class="card-footer px-1 py-1 card-flex-footer flex-spaced">
-                                        <a href="/item/edit-item/<%= item._id %>?edit=true"
-                                            class="button is-info">Edit</a>
-                                        <form action="/item/delete-item" method="POST">
-                                            <input type="hidden" value="<%= item._id %>" name="itemId">
-                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                            <button class="button is-danger" type="submit">Delete</button>
-                                        </form>
-
-                                    </div>
-                                </div>
-
-
-                                <% } %>
+                    <main>
+                        <div class="my-6">
+                            <% if(!isListView) { %>
+                                <%- include('../includes/items-listview.ejs') %>
                                     <% } else { %>
-                                        <h1>No items Found!</h1>
-                             <% } %>
+                                        <%- include('../includes/items-card-view.ejs') %>
+                                            <% } %>
                         </div>
-                </div>
-            </main>
-            <%- include('../includes/end.ejs') %>
+
+
+                        <div class="fab-wrapper">
+                            <input id="fabCheckbox" type="checkbox" class="fab-checkbox" />
+                            <label class="fab" for="fabCheckbox">
+                                <span class="fab-dots fab-dots-1"></span>
+                                <span class="fab-dots fab-dots-2"></span>
+                                <span class="fab-dots fab-dots-3"></span>
+                            </label>
+                            <div class="fab-wheel">
+                                <a class="fab-action fab-action-1" href="/item/add-item">
+                                    <span class=" material-icons">add</span>
+                                </a>
+                                <form action="/item/change-theme" method="POST">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button class="fab-action fab-action-2">
+                                        <% if(isListView) { %> <span class=" material-icons">list</span>
+                                        <% } else { %>
+                                        <span class=" material-icons">dashboard</span>
+                                            <% } %> 
+                                    </button>
+                                </form>
+                                <a class="fab-action fab-action-3">
+                                    <span class=" material-icons">receipt_long</span>
+                                </a>
+                                <form action="/item/deleteMode" method="POST">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button class="fab-action fab-action-4">
+                                        <% if(isListView) { %> <span class=" material-icons">delete_forever</span>
+                                        <% } else { %>
+                                            <span class=" material-icons">delete_forever</span>
+                                            <% } %> 
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </main>
+                    <script src='/js/helpers.js'></script>
+                    <%- include('../includes/end.ejs') %>
