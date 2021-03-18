@@ -23,11 +23,13 @@
                                     </header>
                                     <div class="card-content">
                                         <p>Expiration: <%= (item.itemExp.toISOString().split('T')[0]).replace(/-/g,"/") %> </p>
-                                        <p class="<% if(days < 3) {%> has-text-danger<% } %>">Shelf life remaining: 
-                                           <%= days %> Days
+                                        <p>Shelf life remaining: <span  class="<% if(days < 3) {%> has-text-danger<% } %>"> <%= days %> Days</span>
+                                           
                                         </p>
                                         <p>Quantity: <%= item.quantity %> </p>
-                                        <p class=""> <%= item.description %>  </p>
+                                        <% if(item.description !== '' && item.description !== 'undefined') { %> 
+                                        <p class=""> Description: <%= item.description %>  </p>
+                                        <% } %>
                                     </div>
                                     <div class="card-footer px-1 py-1 card-flex-footer flex-spaced">
                                         <a href="/item/edit-item/<%= item._id %>?edit=true"

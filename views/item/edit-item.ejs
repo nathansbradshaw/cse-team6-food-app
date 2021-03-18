@@ -21,7 +21,7 @@
                                     <input
                                         class="input <%= validationErrors.find(e => e.param === 'title') ? 'is-danger' : 'is-success' %>"
                                         type="text" name="itemName" id="itemName" 
-                                        value="<% if (editing || hasError) { %><%= item.title %><% } %>">
+                                        value="<% if (editing || hasError) { %><%= item.itemName %><% } %>">
                                 </div>
                             </div>
                             <div class="field">
@@ -29,14 +29,14 @@
                                 <input
                                     class="input <%= validationErrors.find(e => e.param === 'imageUrl') ? 'is-danger' : 'is-success' %>"
                                     type="date" name="itemExp" id="itemExp"
-                                    value="<% if (editing || hasError) { %><%= item.imageUrl %><% } %>">
+                                    value="<% if (editing || hasError) { %><%= item.itemExp.toISOString().substring(0, 10) %><% } %>">
                             </div>
                             <div class="field">
                                 <label class="label" for="quantity">Quantity</label>
                                 <input
                                     class="input <%= validationErrors.find(e => e.param === 'price') ? 'is-danger' : 'is-success' %>"
                                     type="number" name="quantity" id="quantity" step="1"
-                                    value="<% if (editing || hasError) { %><%= item.price %><% } %>">
+                                    value="<% if (editing || hasError) { %><%= item.quantity %><% } %>">
                             </div>
                             <div class="field">
                                 <label class="label" for="description">Description</label>
