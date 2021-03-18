@@ -245,3 +245,33 @@ exports.postDeleteItem = (req, res, next) => {
    }
 
 };
+
+
+exports.postSwitchLayout = (req, res, next) => {
+   console.log(req.session.isListView)
+   if(req.session.isListView == false ){
+      req.session.isListView = true;
+   } else {
+      req.session.isListView = false;
+   }
+   return req.session.save(error => {
+      res.redirect('/item/items');
+      console.log(error)
+   })
+   
+}
+
+
+exports.postDeleteMode = (req, res, next) => {
+   console.log(req.session.isListView)
+   if(req.session.isDeleteMode== false ){
+      req.session.isDeleteMode = true;
+   } else {
+      req.session.isDeleteMode = false;
+   }
+   return req.session.save(error => {
+      res.redirect('/item/items');
+      console.log(error)
+   })
+   
+}

@@ -22,4 +22,8 @@ router.post('/edit-item', isAuth,  itemController.postEditItem)
 
 router.post('/delete-item', isAuth, itemController.postDeleteItem);
 
+router.post('/change-theme', isAuth, itemController.postSwitchLayout);
+
+router.post('/deleteMode', isAuth, itemController.postDeleteMode);
+
 module.exports = router;

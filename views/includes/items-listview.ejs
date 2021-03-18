@@ -1,0 +1,51 @@
+<% const months=["January", "February" , "March" , "April" , "May" , "June" , "July" , "August" , "September"
+   , "October" , "November" , "December" ]; %>
+   <% let today=new Date(); %>
+      <table class="table is-hoverable is-fullwidth  is-striped">
+         <thead id="table_head">
+            <tr>
+               <th>Item Name</th>
+               <th>Expiration</th>
+               <th>Shelf Life Remaining</th>
+               <th>Quantity</th>
+               <th>Edit</th>
+               <% if(isDeleteMode) { %> 
+               <th>Delete Forever</th>
+               <% } %> 
+
+            </tr>
+         </thead>
+         <tbody class="">
+            <% if (items.length> 0) { %>
+               <% for (let item of items) { %>
+                  <% let expDate=new Date((item.itemExp.toISOString().split('T')[0]).replace(/-/g,"/")); let
+                     difference=expDate.getTime() - today.getTime(); let days=Math.ceil(difference / (1000 * 3600 *
+                     24)); %>
+                     <tr class="">
+                           <td class="is-bold"> <%= item.itemName %></td>
+                           <% date=(item.itemExp); date.setHours(date.getHours() + 12); console.log(date)%>
+                           <td><span class="is-bold"><%= months[date.getMonth()] %><%= date.getDate() %>, <%= date.getFullYear() %></span> </td>
+                           <td><span  class="is-bold<% if(days < 3) {%> has-text-danger<% } %>"> <%= (days > 0)? days + ' Days' : 'Expired ' + Math.abs(days) + ' ago!'  %></td>
+                           <td><span class="is-bold"><%= item.quantity %></span> </td>
+                           <td><a href="/item/edit-item/<%= item._id %>?edit=true" class="button is-info">Edit</a></td>
+                           <% if(isDeleteMode) { %> 
+                              <td>
+                              <form action="/item/delete-item" method="POST">
+                                 <input type="hidden" value="<%= item._id %>" name="itemId">
+                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                 <button class="button is-danger" type="submit">Delete</button>
+                             </form>
+
+
+                              </td>
+                           <% } %> 
+                     </tr>
+
+
+                     <% } %>
+                        <% } else { %>
+                           <h1>No items Found!</h1>
+                           <% } %>
+
+
+         </tbody>

@@ -94,6 +94,7 @@ exports.postLogin = (req, res, next) => {
         if (isSame) {
           req.session.isLoggedIn = true;
           req.session.user = user;
+          req.session.isListView = false;
           return req.session.save(err => {
             console.log(err);
             res.redirect('/');

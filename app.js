@@ -40,11 +40,11 @@ app.use(csrfProtection);
 app.use(flash());
 
 
-// const corsOptions = {
-//    origin: "https://nathan-cse341-prove.herokuapp.com/",
-//    optionsSuccessStatus: 200
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+   origin: "https://cse-food-app.herokuapp.com/",
+   optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 
 const options = {
@@ -56,8 +56,12 @@ const options = {
 };
 app.use((req, res, next) => {
    res.locals.isAuthenticated = req.session.isLoggedIn; 
+   res.locals.isListView = req.session.isListView; 
+   res.locals.isDeleteMode = req.session.isDeleteMode; 
    if(req.session.user) {
       res.locals.username = req.session.user.fname;
+   } else {
+      res.locals.username = 'Guest';
    }
    res.locals.csrfToken = req.csrfToken();
    // res.locals.csrfToken = '1234';
