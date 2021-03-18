@@ -15,14 +15,16 @@ const itemSchema = new Schema({
       type: Date,
       required: true
    },
-   quantitiy: {
-      type: Number
+   quantity: {
+      type: Number,
+      required: true
    },
    description: {
       type: String
    },
    userId: {
       type: Schema.Types.ObjectId,
+      required: true
    }
 
 });

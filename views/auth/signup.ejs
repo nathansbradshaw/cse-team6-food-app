@@ -1,0 +1,59 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+            <main>
+                <div class="container">
+                    <div class="section">
+
+                        <% if (errorMessage) { %>
+                            <div class="box has-background-danger">
+                                <%= errorMessage %>
+                            </div>
+                            <% } %>
+                                <form class="signup-form" action="/signup" method="POST">
+                                    <div class="field">
+                                        <label class="label" for="fname">First Name</label>
+                                        <input
+                                            class="input <%= validationErrors.find(e => e.param === 'fname') ? 'is-danger' : 'is-success' %>"
+                                            type="fname" name="fname" id="fname" value="<%= oldInput.fname %> ">
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="lname">Last Name</label>
+                                        <input
+                                            class="input <%= validationErrors.find(e => e.param === 'lname') ? 'is-danger' : 'is-success' %>"
+                                            type="lname" name="lname" id="lname" value="<%= oldInput.lname %>">
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="email">E-Mail</label>
+                                        <input
+                                            class="input <%= validationErrors.find(e => e.param === 'email') ? 'is-danger' : 'is-success' %>"
+                                            type="email" name="email" id="email" value="<%= oldInput.email %>">
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="password">Password</label>
+                                        <input
+                                            class="input <%= validationErrors.find(e => e.param === 'password') ? 'is-danger' : 'is-success' %> 
+                                            <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'is-danger' : 'is-success' %>"
+                                            type="password" name="password" id="password"
+                                            value="<%= oldInput.password %>">
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="confirmPassword">Confirm Password</label>
+                                        <input
+                                            class="input <%= validationErrors.find(e => e.param === 'password') ? 'is-danger' : 'is-success' %>
+                                            <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'is-danger' : 'is-success' %>"
+                                            type="password" name="confirmPassword" id="confirmPassword"
+                                            value="<%= oldInput.confirmPassword %>">
+                                    </div>
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button class="button is-success" type="submit">Sign up</button>
+                                </form>
+                    </div>
+                </div>
+            </main>
+            <%- include('../includes/end.ejs') %>

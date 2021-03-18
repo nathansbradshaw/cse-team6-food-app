@@ -14,19 +14,27 @@
     <div id="navbarBasic" class="navbar-menu">
         <div class="navbar-item">
             <a class="navbar-item <%= path === '/' ? 'active' : '' %>" href="/">Home</a>
-            <a class="navbar-item <%= path === '/products' ? 'active' : '' %>" href="/products">Items</a>
-            <a class="navbar-item <%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-            <a class="navbar-item <%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
-                <a class="navbar-item <%= path === '/item/add-item' ? 'active' : '' %>"
-                    href="/item/add-item">
-                    Add Item
-                </a>
-                <a class=" navbar-item <%= path === '/item/items' ? 'active' : '' %>" href="/item/items">Items
-                </a>
+                <% if (isAuthenticated) { %>
+                    <p class="mr-1">Welcome <%=  username %></p> <p class="ml-2">|</p>
+                        <% } %>
+                <% if (isAuthenticated) { %>
+                    <a class="navbar-item <%= path === '/item/add-item' ? 'active' : '' %>"
+                        href="/item/add-item">
+                        Add Item
+                    </a>
+                    <a class=" navbar-item <%= path === '/item/items' ? 'active' : '' %>" href="/item/items">Pantry </a>
+                    <form class=" navbar-tem" action="/logout" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button class="button navbar-item is-primary">Logout</button> </form>
+                    <% } else { %>
+                        <a class=" navbar-item <%= path === '/login' ? 'active' : '' %>" href="/login">login </a>
+                        <a class=" navbar-item <%= path === '/signup' ? 'active' : '' %>" href="/signup">signup</a>
+                        <% } %>
             </div>
         </div>
     </div>

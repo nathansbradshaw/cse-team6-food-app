@@ -5,9 +5,10 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const session = require('express-session');
-// const MongoDBStore = require('connect-mongodb-session')(session);
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 // const csrf = require('csurf');
+const flash = require('connect-flash');
 
 const uri = process.env.MONGODB_URL || (process.env.URI).toString();
 const adminID = (process.env.ADMIN_ID).toString();
@@ -16,20 +17,26 @@ const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localho
 const publicDirectory = path.join(__dirname, 'public');
 
 const errorController = require('./controllers/error');
-// const User = require('./models/user')
+const User = require('./models/user')
 
 const app = express();
-
+const store = new MongoDBStore({
+   uri:uri,
+   collection: 'sessions'
+})
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const mainRoutes = require('./routes/main');
 const itemRoutes = require('./routes/item');
+const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(session({secret: 'my secret change me', resave: false, saveUninitialized: false, store: store}));
+// app.use(csrfProtection);
+app.use(flash());
 
 
 // const corsOptions = {
@@ -47,31 +54,51 @@ const options = {
    family: 4
 };
 app.use((req, res, next) => {
-   // res.locals.isAuthenticated = req.session.isLoggedIn; 
-   res.locals.isAuthenticated = true;
+   res.locals.isAuthenticated = req.session.isLoggedIn; 
+   if(req.session.user) {
+      res.locals.username = req.session.user.fname;
+   }
    // res.locals.csrfToken = req.csrfToken();
    res.locals.csrfToken = '1234';
    next();
 })
 
 
-// app.use((req, res, next) => {
-//    User.findById(adminID)
-//       .then(user => {
-//          req.user = user;
-//          next();
-//       })
-//       .catch(err => console.log(err));
-// })
 
+app.use((req, res, next) => {
+   if (!req.session.user){
+      return next();
+   }
+
+   User.findById(req.session.user._id)
+   .then(user => {
+      if(!user) {
+         return next();
+      }
+      req.user = user;
+      next();
+   })
+   .catch(err => {
+      next(new Error(err));
+   } );
+})
 
 app.use(mainRoutes);
 app.use('/item',itemRoutes);
+app.use(authRoutes);
 
 app.get('/500',errorController.get500);
 
 app.use(errorController.get404);
 
+app.use((error, req, res, next) => {
+   console.log(error);
+   res.status(500).render('500', {
+      pageTitle: 'Server Side Error', path: '/500',
+      isAuthenticated: req.session.isLoggedIn,
+      
+    });
+})
 
 mongoose.connect(uri, options).then(result => {
    app.listen(PORT, () => console.log(`Listening on ${PORT}`));
