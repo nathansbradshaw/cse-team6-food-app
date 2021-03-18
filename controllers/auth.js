@@ -219,7 +219,7 @@ exports.postReset = (req, res, next) => {
         subject: 'Password Reset',
         html: `
         <p>Your password has been requested to be reset, if you did not do this then ignore this message</p>
-        <p>Click this <a href="http://localhost:5000/reset/${token}"> link </a> to reset the password </p>
+        <p>Click this <a href="https://cse-food-app.herokuapp.com/reset/${token}"> link </a> to reset the password </p>
         `
       }).catch(err => {
         const error = new Error(err);

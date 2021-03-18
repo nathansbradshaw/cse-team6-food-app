@@ -4,27 +4,56 @@
 
 <body>
     <%- include('../includes/navigation.ejs') %>
-    <section class="hero is-medium is-primary is-bold">
-        <div class="hero-body">
+    <section class="hero is-medium paralax-logo ">
+        <div class="hero-body bg-translucent">
           <div class="container">
-            <h1 class="title">
+            <h1 class="title has-text-white">
               My Pantry
             </h1>
-            <h2 class="subtitle">
-             Mission: Keep track of what food you have and when it expires.
+            <h2 class="subtitle has-text-white">
+             Keep track of what food you have and when it expires.
             </h2>
           </div>
         </div>
       </section>
-    <main class="is-primary">
-      <% if (isAuthenticated) { %>
-        <a class=" button is-primary" href="/add-item">add an item</a>
-        <a class=" button is-primary" href="/item/items">View my pantry</a>
-        <a class=" button is-primary" href="/shopping-list">View my Shopping list</a>
+    <main class="is-primary ">
+      <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
 
-      <% } else {%>
-        <a class=" button is-primary" href="/login">login to use the app</a>
-      <% } %> 
+        <% if (isAuthenticated) { %>
+          <h2 class="title has-text-white-bis pb-4">Need Help?</h2>
+            <h2 class="subtitle has-text-white">
+              How do I use the app? <br>
+              - You can add your first item by clicking Add item in the navigation bar, or by selecting the blue floating button in the pantry page. <br>
+              How do I delete an Item?<br>
+              - While in the pantry page, click/tap the floating blue button and click/tap the <span class=" material-icons">delete_forever</span> to toggle the delete button. 
+              After toggling on the delete button, select delete on the item you wish to delete. <br>
+              How do I view my shopping list?
+
+          </h2>
+          <a class=" button is-info" href="/add-item">Add an Item</a>
+          <a class=" button is-info" href="/item/items">View My Pantry</a>
+          <a class=" button is-info" href="/shopping-list">View My Shopping list</a>
+  
+        <% } else {%>
+          <h2 class="title has-text-white-bis pb-4">Our Mission</h2>
+            <h2 class="subtitle has-text-white">
+              Food is always going bad, and food waste is such a terrible issue. 
+              We don't know how many times we have seen someone throw out old vegitables,
+              or moldy leftovers, that they would have used if they knew they had them. 
+              Here at My Pantry, we aim to fix this issue by allowing our users to keep 
+              track of what food items they have. Sign up today to do your part in eleminating food waste!
+          </h2>
+          <a class=" button is-info" href="/login">login</a>
+          <a class=" button is-info" href="/signup">Sign up</a>
+        <% } %> 
+            
+
+        </div>
+      </div>
+    </section>
+     
         
        
     </main>
