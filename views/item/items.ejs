@@ -3,12 +3,18 @@
 
     <body class="has-background-grey-light">
         <%- include('../includes/navigation.ejs') %>
+        <% let today = new Date(); %> 
 
             <main>
                 <div class="flex-box">
                     <% if (items.length> 0) { %>
                         <div class="flex-box">
                             <% for (let item of items) { %>
+                                <%
+                                let expDate = new Date((item.itemExp.toISOString().split('T')[0]).replace(/-/g,"/")); 
+                                let difference = expDate.getTime() - today.getTime();
+                                let days = Math.ceil(difference / (1000 * 3600 * 24));  
+                                %>
                                 <div class="card item-item card-parent">
                                     <header class="card-header">
                                         <h2 class="card-header-title is-centered">
@@ -16,15 +22,12 @@
                                         </h2>
                                     </header>
                                     <div class="card-content">
-                                        <p>Expiration: <%= item.itemExp %>" </p>
-                                    </div>
-                                    <div class="card-content">
-                                        <h2 class="has-text-centered">Quantity: 
-                                            <%= item.quantity %>
-                                        </h2>
-                                        <p class="">
-                                            <%= item.description %>
+                                        <p>Expiration: <%= (item.itemExp.toISOString().split('T')[0]).replace(/-/g,"/") %> </p>
+                                        <p class="<% if(days < 3) {%> has-text-danger<% } %>">Shelf life remaining: 
+                                           <%= days %> Days
                                         </p>
+                                        <p>Quantity: <%= item.quantity %> </p>
+                                        <p class=""> <%= item.description %>  </p>
                                     </div>
                                     <div class="card-footer px-1 py-1 card-flex-footer flex-spaced">
                                         <a href="/item/edit-item/<%= item._id %>?edit=true"

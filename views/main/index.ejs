@@ -8,15 +8,23 @@
         <div class="hero-body">
           <div class="container">
             <h1 class="title">
-              "Index"
+              My Pantry
             </h1>
             <h2 class="subtitle">
-              Main
+             Mission: Keep track of what food you have and when it expires.
             </h2>
           </div>
         </div>
       </section>
     <main class="is-primary">
+      <% if (isAuthenticated) { %>
+        <a class=" button is-primary" href="/add-item">add an item</a>
+        <a class=" button is-primary" href="/items">View my pantry</a>
+        <a class=" button is-primary" href="/shopping-list">View my Shopping list</a>
+
+      <% } else {%>
+        <a class=" button is-primary" href="/login">login to use the app</a>
+      <% } %> 
         
        
     </main>
