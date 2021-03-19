@@ -25,7 +25,7 @@
                            <td class="is-bold"> <%= item.itemName %></td>
                            <% date=(item.itemExp); date.setHours(date.getHours() + 12); console.log(date)%>
                            <td><span class="is-bold"><%= months[date.getMonth()] %><%= date.getDate() %>, <%= date.getFullYear() %></span> </td>
-                           <td><span  class="is-bold<% if(days < 3) {%> has-text-danger<% } %>"> <%= (days > 0)? days + ' Days' : 'Expired ' + Math.abs(days) + ' ago!'  %></td>
+                           <td><span  class="is-bold<% if(days < 3) {%> has-text-danger<% } %>"> <%= (days > 0)? days + ' Days' : 'Expired ' + Math.abs(days) + ' days ago!'  %></td>
                            <td><span class="is-bold"><%= item.quantity %></span> </td>
                            <td><a href="/item/edit-item/<%= item._id %>?edit=true" class="button is-info">Edit</a></td>
                            <% if(isDeleteMode) { %> 

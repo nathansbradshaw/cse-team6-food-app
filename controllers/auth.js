@@ -162,7 +162,7 @@ exports.postSignup = (req, res, next) => {
         to: email,
         from: process.env.ADMIN_EMAIL,
         subject: 'sign up',
-        html: '<h1>congratulations on signing up for "The Shop!"</h1>'
+        html: '<h1>congratulations on signing up for My Pantry!</h1>'
       }).catch(err => {
         console.log(err);
       })
