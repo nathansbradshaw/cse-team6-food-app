@@ -15,7 +15,7 @@ exports.getAddItem = (req, res, next) => {
 
 exports.getItems = (req, res, next) => {
    // TODO: get item by user
-   Item.find().then(items => {
+   Item.find({ userId: req.user._id }).then(items => {
       return res.render('item/items', {
          pageTitle: 'Pantry',
          path: '/item/items',
@@ -230,9 +230,9 @@ exports.getEditItem = (req, res, next) => {
 
 exports.postDeleteItem = (req, res, next) => {
    const itemId = req.body.itemId;
-   // TODO: Check if correct user is deleting product
+   // TODO: 
    if (true) {
-      Item.deleteOne({ _id: itemId })
+      Item.deleteOne({ _id: itemId, userId: req.user._id })
          .then(() => {
             console.log('DESTROYED ITEM');
             res.redirect('/item/items');
