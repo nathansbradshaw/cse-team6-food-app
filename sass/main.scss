@@ -1,48 +1,45 @@
-
 @charset "utf-8";
 $primary: #11689b;
 $primary-dark: #074747;
-$primary-light:#fa5788;
+$primary-light: #fa5788;
 
 $info: #119569;
-$info-dark:#0c7772;
-$info-light:#5472d3;
+$info-dark: #0c7772;
+$info-light: #5472d3;
 
 $grey-light: #e6e6e6;
 $footer-background-color: #b6b6b6;
 $table-striped-row-even-hover-background-color: $info-light;
-$table-row-hover-background-color:#6b82cf;
-$table-striped-row-even-background-color:$primary;
+$table-row-hover-background-color: #6b82cf;
+$table-striped-row-even-background-color: $primary;
 // $table-striped-row-even-background-color: $info;
 @import "../node_modules/bulma/bulma.sass";
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
 
-
-
-$navitem-border-radious: .7em;
+$navitem-border-radious: 0.7em;
 html,
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 body > footer {
-    margin-top: auto;
+  margin-top: auto;
 }
-.bg-translucent{
+.bg-translucent {
   background-color: #242323ab;
 }
 .paralax-logo {
   background-image: url(/img/food2.jpg);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 }
 .paralax-empty {
   background-image: url(/img/empty.png);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 }
 .card-parent {
   display: flex;
@@ -79,13 +76,12 @@ body > footer {
   display: block;
 }
 
-
 // -----------------------------------------------------------
-.navbar-item{
-   border-radius: $navitem-border-radious;
-   transition: 0.7s;
-   margin-left: .5em;
-   color: aliceblue;
+.navbar-item {
+  border-radius: $navitem-border-radious;
+  transition: 0.7s;
+  margin-left: 0.5em;
+  color: aliceblue;
 }
 .navbar-item a:hover,
 .navbar-item a:active,
@@ -93,16 +89,15 @@ body > footer {
   background-color: $primary-dark;
   border-radius: $navitem-border-radious;
   color: aliceblue;
-  -moz-box-shadow:    inset 1px 1px 5px #0000004a;
+  -moz-box-shadow: inset 1px 1px 5px #0000004a;
   -webkit-box-shadow: inset 1px 1px 5px #0000004a;
-  box-shadow:         inset 1px 1px 5px #0000004a;
+  box-shadow: inset 1px 1px 5px #0000004a;
 }
-.has-shadow{
-   -moz-box-shadow:     1px 1px 5px  #0000004a;
-   -webkit-box-shadow:  1px 1px 5px  #0000004a;
-   box-shadow:          1px 1px 5px  #0000004a;
+.has-shadow {
+  -moz-box-shadow: 1px 1px 5px #0000004a;
+  -webkit-box-shadow: 1px 1px 5px #0000004a;
+  box-shadow: 1px 1px 5px #0000004a;
 }
-
 
 @media (min-width: 768px) {
   .main-header__nav {
@@ -112,26 +107,24 @@ body > footer {
   #side-menu-toggle {
     display: none;
   }
-  
 }
 @media only screen and (max-width: 1023px) {
-  .navbar-item{
+  .navbar-item {
     color: black;
-
   }
   .navbar-item a:hover,
-.navbar-item a:active,
-.navbar-item a.active {
-  background-color: $primary-dark;
-  border-radius: $navitem-border-radious;
-  color: aliceblue;
-  -moz-box-shadow:    inset 1px 1px 5px #0000004a;
-  -webkit-box-shadow: inset 1px 1px 5px #0000004a;
-  box-shadow:         inset 1px 1px 5px #0000004a;
-}
+  .navbar-item a:active,
+  .navbar-item a.active {
+    background-color: $primary-dark;
+    border-radius: $navitem-border-radious;
+    color: aliceblue;
+    -moz-box-shadow: inset 1px 1px 5px #0000004a;
+    -webkit-box-shadow: inset 1px 1px 5px #0000004a;
+    box-shadow: inset 1px 1px 5px #0000004a;
+  }
 }
 
-.form-control input.invalid, 
+.form-control input.invalid,
 .form-control textarea.invalid {
   border-color: red;
 }
@@ -139,19 +132,12 @@ body > footer {
   font-weight: bolder;
 }
 
-
-
-
 tr th {
   color: #49657a;
   text-align: left;
   padding: 16px;
   background-color: $primary;
 }
-
-
-
-
 
 // FAB
 .fab-wrapper {
@@ -321,4 +307,17 @@ tr th {
 }
 .button {
   position: inherit !important;
+}
+
+//Example Fab
+.example-fab-action {
+  background: #0f1941;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: White;
+  box-shadow: 0 0.1rem 1rem rgba(24, 66, 154, 0.82);
 }
