@@ -39,7 +39,7 @@
                                     value="<% if (editing || hasError) { %><%= item.quantity %><% } %>">
                             </div>
                             <div class="field">
-                                <label class="label" for="description">Description</label>
+                                <label class="label" for="description">Description (optional)</label>
                                 <textarea
                                     class="textarea <%= validationErrors.find(e => e.param === 'description') ? 'is-danger' : 'is-success' %>"
                                     name="description" id="description"
@@ -54,5 +54,28 @@
                                         <% if (editing) { %>Update item<% } else { %>Add item<% } %>
                                     </button>
                         </form>
+
+
+
+                        <div class="fab-wrapper">
+                            <input id="fabCheckbox" type="checkbox" class="fab-checkbox" />
+                            <label class="fab" for="fabCheckbox">
+                                <span class="fab-dots fab-dots-1"></span>
+                                <span class="fab-dots fab-dots-2"></span>
+                                <span class="fab-dots fab-dots-3"></span>
+                            </label>
+                            <div class="fab-wheel">
+                              
+                  
+                                    <a href='/item/items' class="fab-action fab-action-3">
+                                        <span class=" material-icons">arrow_back</span>
+                                    </a>
+              
+                                
+                            </div>
+                        </div>
+
+
+
                     </main>
                     <%- include('../includes/end.ejs') %>

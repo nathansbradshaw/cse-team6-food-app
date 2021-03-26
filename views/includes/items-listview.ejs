@@ -1,6 +1,7 @@
 <% const months=["January", "February" , "March" , "April" , "May" , "June" , "July" , "August" , "September"
    , "October" , "November" , "December" ]; %>
    <% let today=new Date(); %>
+   
       <table class="table is-hoverable is-fullwidth  is-striped">
          <thead id="table_head">
             <tr>
@@ -8,15 +9,16 @@
                <th>Expiration</th>
                <th>Shelf Life Remaining</th>
                <th>Quantity</th>
+               <% if(isEditMode) { %> 
                <th>Edit</th>
-               <% if(isDeleteMode) { %> 
+               <%} if(isDeleteMode) { %> 
                <th>Delete Forever</th>
                <% } %> 
 
             </tr>
          </thead>
          <tbody class="">
-            <% if (items.length> 0) { %>
+            
                <% for (let item of items) { %>
                   <% let expDate=new Date((item.itemExp.toISOString().split('T')[0]).replace(/-/g,"/")); let
                      difference=expDate.getTime() - today.getTime(); let days=Math.ceil(difference / (1000 * 3600 *
@@ -24,11 +26,12 @@
                      <tr class="">
                            <td class="is-bold"> <%= item.itemName %></td>
                            <% date=(item.itemExp); date.setHours(date.getHours() + 12); console.log(date)%>
-                           <td><span class="is-bold"><%= months[date.getMonth()] %><%= date.getDate() %>, <%= date.getFullYear() %></span> </td>
+                           <td><span class="is-bold"><%= months[date.getMonth()] %> <%= date.getDate() %>, <%= date.getFullYear() %></span> </td>
                            <td><span  class="is-bold<% if(days < 3) {%> has-text-danger<% } %>"> <%= (days > 0)? days + ' Days' : 'Expired ' + Math.abs(days) + ' days ago!'  %></td>
                            <td><span class="is-bold"><%= item.quantity %></span> </td>
+                           <% if(isEditMode) { %> 
                            <td><a href="/item/edit-item/<%= item._id %>?edit=true" class="button is-info">Edit</a></td>
-                           <% if(isDeleteMode) { %> 
+                           <% } if(isDeleteMode) { %> 
                               <td>
                               <form action="/item/delete-item" method="POST">
                                  <input type="hidden" value="<%= item._id %>" name="itemId">
@@ -42,10 +45,8 @@
                      </tr>
 
 
-                     <% } %>
-                        <% } else { %>
-                           <h2>No items Found! <a class="" href="/item/add-item"> Add Items? </a></h2>
-                           <% } %>
+         
 
 
          </tbody>
+         <% } %>

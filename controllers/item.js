@@ -201,3 +201,18 @@ exports.postDeleteMode = (req, res, next) => {
    })
    
 }
+
+exports.postEditMode = (req, res, next) => {
+   if(req.session.isEditMode == true ){
+      req.session.isEditMode = false;
+   } else {
+      req.session.isEditMode = true;
+   }
+   return req.session.save(error => {
+      res.redirect('/item/items');
+      console.log(error)
+   })
+
+   
+   
+}

@@ -1,11 +1,11 @@
 
 @charset "utf-8";
-$primary: #18c29d;
-$primary-dark: #8c0032;
+$primary: #11689b;
+$primary-dark: #074747;
 $primary-light:#fa5788;
 
-$info: #0d47a1;
-$info-dark:#002171;
+$info: #119569;
+$info-dark:#0c7772;
 $info-light:#5472d3;
 
 $grey-light: #e6e6e6;
@@ -38,7 +38,12 @@ body > footer {
   background-repeat: no-repeat;
   background-size: 100vw;
 }
-
+.paralax-empty {
+  background-image: url(/img/empty.png);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100vw;
+}
 .card-parent {
   display: flex;
   flex-flow: column nowrap;
@@ -293,19 +298,27 @@ tr th {
 }
 
 .fab-wheel .fab-action-1 {
-  right: -1rem;
-  top: 0;
+  right: -2rem;
+  top: -1rem;
 }
 
 .fab-wheel .fab-action-2 {
-  right: 3.4rem;
-  top: 0.5rem;
+  right: 2.4rem;
+  top: -0.25rem;
 }
 .fab-wheel .fab-action-3 {
-  left: 0.5rem;
-  bottom: 3.4rem;
+  left: 1rem;
+  bottom: 5.4rem;
 }
 .fab-wheel .fab-action-4 {
   left: 0;
-  bottom: -1rem;
+  bottom: 1.5rem;
+}
+
+.fab-wheel .fab-action-5 {
+  left: 0;
+  bottom: -2.5rem;
+}
+.button {
+  position: inherit !important;
 }
