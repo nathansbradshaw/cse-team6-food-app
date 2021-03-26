@@ -36,13 +36,13 @@ body > footer {
   background-image: url(/img/food2.jpg);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size: 100vw;
+  background-size:cover;
 }
 .paralax-empty {
   background-image: url(/img/empty.png);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size: 100vw;
+  background-size:cover;
 }
 .card-parent {
   display: flex;
