@@ -7816,7 +7816,7 @@ body > footer {
 .navbar-item {
   border-radius: 0.7em;
   transition: 0.7s;
-  margin-left: .5em;
+  margin-left: 0.5em;
   color: aliceblue; }
 
 .navbar-item a:hover,
@@ -7830,9 +7830,9 @@ body > footer {
   box-shadow: inset 1px 1px 5px #0000004a; }
 
 .has-shadow {
-  -moz-box-shadow: 1px 1px 5px  #0000004a;
-  -webkit-box-shadow: 1px 1px 5px  #0000004a;
-  box-shadow: 1px 1px 5px  #0000004a; }
+  -moz-box-shadow: 1px 1px 5px #0000004a;
+  -webkit-box-shadow: 1px 1px 5px #0000004a;
+  box-shadow: 1px 1px 5px #0000004a; }
 
 @media (min-width: 768px) {
   .main-header__nav {
@@ -8016,3 +8016,14 @@ tr th {
 
 .button {
   position: inherit !important; }
+
+.example-fab-action {
+  background: #0f1941;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: White;
+  box-shadow: 0 0.1rem 1rem rgba(24, 66, 154, 0.82); }

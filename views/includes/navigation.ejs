@@ -20,7 +20,7 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <% if (isAuthenticated) { %>
-                    <p class="mr-1">Welcome <%=  username %> - </p>
+                    <p class="navbar-item">Welcome <%=  username %> </p>
                     <a class="navbar-item <%= path === '/item/add-item' ? 'active' : '' %>"
                         href="/item/add-item">
                         Add Item
