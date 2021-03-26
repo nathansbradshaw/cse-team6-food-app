@@ -1,13 +1,14 @@
 <%- include('../includes/head.ejs') %>
     </head>
     <% const months=["January", "February" , "March" , "April" , "May" , "June" , "July" , "August" , "September"
-        , "October" , "November" , "December" ]; %>
+        , "October" , "November" , "December" ]; 
+        let today=new Date();
+        %>
 
         <body class="has-background-grey-light">
             <%- include('../includes/navigation.ejs') %>
-                <% let today=new Date(); %>
-
                     <main>
+                        <% if (items.length> 0) { %>
                         <div class="my-6">
                             <% if(!isListView) { %>
                                 <%- include('../includes/items-listview.ejs') %>
@@ -15,6 +16,20 @@
                                         <%- include('../includes/items-card-view.ejs') %>
                                             <% } %>
                         </div>
+
+
+
+                        <% } else { %>
+                           <section class="hero is-fullheight paralax-empty ">
+                              <div class="hero-body bg-translucent">
+                                <div class="container box">
+                                 <h2>No items Found! <a class="" href="/item/add-item"> Add Items? </a></h2>
+                                </div>
+                              </div>
+                            </section>
+                           
+                           <% } %>
+
 
 
                         <div class="fab-wrapper">
@@ -32,9 +47,9 @@
                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                     <button class="fab-action fab-action-2">
                                         <% if(isListView) { %> <span class=" material-icons">list</span>
-                                        <% } else { %>
-                                        <span class=" material-icons">dashboard</span>
-                                            <% } %> 
+                                            <% } else { %>
+                                                <span class=" material-icons">dashboard</span>
+                                                <% } %>
                                     </button>
                                 </form>
                                 <a class="fab-action fab-action-3">
@@ -42,13 +57,17 @@
                                 </a>
                                 <form action="/item/deleteMode" method="POST">
                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                    <button class="fab-action fab-action-4">
-                                        <% if(isListView) { %> <span class=" material-icons">delete_forever</span>
-                                        <% } else { %>
-                                            <span class=" material-icons">delete_forever</span>
-                                            <% } %> 
+                                    <button class="fab-action fab-action-5">
+                                        <span class=" material-icons">delete_forever</span>
                                     </button>
                                 </form>
+                                <form action="/item/editMode" method="POST">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button class="fab-action fab-action-4">
+                                        <span class=" material-icons">edit</span>
+                                    </button>
+                                </form>
+                                
                             </div>
                         </div>
                     </main>

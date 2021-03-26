@@ -58,6 +58,7 @@ app.use((req, res, next) => {
    res.locals.isAuthenticated = req.session.isLoggedIn; 
    res.locals.isListView = req.session.isListView; 
    res.locals.isDeleteMode = req.session.isDeleteMode; 
+   res.locals.isEditMode = req.session.isEditMode; 
    if(req.session.user) {
       res.locals.username = req.session.user.fname;
    } else {

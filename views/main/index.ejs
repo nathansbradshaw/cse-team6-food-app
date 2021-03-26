@@ -4,7 +4,7 @@
 
 <body>
     <%- include('../includes/navigation.ejs') %>
-    <section class="hero is-medium paralax-logo ">
+    <section class="hero is-fullheight paralax-logo ">
         <div class="hero-body bg-translucent">
           <div class="container">
             <h1 class="title has-text-white">
@@ -13,6 +13,11 @@
             <h2 class="subtitle has-text-white">
              Keep track of what food you have and when it expires.
             </h2>
+            <% if (isAuthenticated) { %>
+              <a class=" button is-info" href="/item/items">View My Pantry</a>
+            <% } else {%>
+              <a class=" button is-info" href="/login">login</a>
+            <% } %> 
           </div>
         </div>
       </section>
@@ -53,8 +58,47 @@
         </div>
       </div>
     </section>
-     
-        
+
+    <% if (isAuthenticated) { %>
+    <div class="fab-wrapper">
+      <input id="fabCheckbox" type="checkbox" class="fab-checkbox" />
+      <label class="fab" for="fabCheckbox">
+          <span class="fab-dots fab-dots-1"></span>
+          <span class="fab-dots fab-dots-2"></span>
+          <span class="fab-dots fab-dots-3"></span>
+      </label>
+      <div class="fab-wheel">
+          <a class="fab-action fab-action-1" href="/item/add-item">
+              <span class=" material-icons">add</span>
+          </a>
+          <form action="/item/change-theme" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button class="fab-action fab-action-2">
+                  <% if(isListView) { %> <span class=" material-icons">list</span>
+                      <% } else { %>
+                          <span class=" material-icons">dashboard</span>
+                          <% } %>
+              </button>
+          </form>
+          <a class="fab-action fab-action-3">
+              <span class=" material-icons">receipt_long</span>
+          </a>
+          <form action="/item/deleteMode" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button class="fab-action fab-action-5">
+                  <span class=" material-icons">delete_forever</span>
+              </button>
+          </form>
+          <form action="/item/editMode" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button class="fab-action fab-action-4">
+                  <span class=" material-icons">edit</span>
+              </button>
+          </form>
+          
+      </div>
+  </div>
+        <% } %> 
        
     </main>
 <%- include('../includes/end.ejs') %>
