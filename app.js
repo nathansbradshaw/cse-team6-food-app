@@ -3,6 +3,7 @@ const cors = require('cors') // Place this with other requires (like 'path' and 
 const path = require('path');
 
 const express = require('express');
+var favicon = require('serve-favicon')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -38,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'my secret change me', resave: false, saveUninitialized: false, store: store}));
 app.use(csrfProtection);
 app.use(flash());
-
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 const corsOptions = {
    origin: "https://cse-food-app.herokuapp.com/",
